@@ -1,12 +1,3 @@
-const pageElem = document.querySelector('.page-error');
-const messageElem = pageElem.querySelector('.message');
-const buttonElem = pageElem.querySelector('button');
-const show = message => {
-  messageElem.innerHTML = message;
-  buttonElem.focus();
-  transition('in-modal', 'error');
-};
-
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function createCommonjsModule(fn, basedir, module) {
@@ -36,32 +27,70 @@ var h,f,l,d=String.fromCharCode;t.exports={version:"2.1.2",encode:a,decode:p};},
 });
 
 const socketio = {
-  activities: socket_io('http://localhost:5500/activities'),
-  auth: socket_io('http://localhost:5500/auth'),
+  activities: socket_io(`${window.location.host}/activities`),
+  auth: socket_io(`${window.location.host}/auth`),
+};
+
+const add = (activity) => {
+  console.log(activity);
+  const activityElem = templateElem.cloneNode(true);
+  activityElem.querySelector('.name').innerHTML = activity.name;
+  activityListElem.appendChild(activityElem);
+  sortList();
+};
+const sortList = () => {
+  [...pageElem.querySelectorAll('.activity-list > *:not(template)')]
+    .sort((a, b) =>
+      a.querySelector('.name').innerHTML < b.querySelector('.name').innerHTML
+        ? -1
+        : 1
+    )
+    .forEach((activityElem) => activityListElem.appendChild(activityElem));
+};
+
+const pageElem = document.querySelector('.page-activities');
+const activityListElem = pageElem.querySelector('.activity-list');
+const templateElem = pageElem.querySelector('template#activity').content;
+socketio.activities.on('add', (data) => add(data.activity));
+
+var activities = {
+  addEventListeners: () => {},
+  add,
+};
+
+const pageElem$1 = document.querySelector('.page-error');
+const messageElem = pageElem$1.querySelector('.message');
+const buttonElem = pageElem$1.querySelector('button');
+const show = message => {
+  messageElem.innerHTML = message;
+  buttonElem.focus();
+  transition('in-modal', 'error');
 };
 
 const getToken = () => localStorage.getItem('token');
-const login = async credentials => socketio.auth.emit('login', credentials);
-const setToken = token => localStorage.setItem('token', token);
-const signup = async credentials => socketio.auth.emit('signup', credentials);
+const login = async (credentials) => socketio.auth.emit('login', credentials);
+const setToken = (token) => localStorage.setItem('token', token);
+const signup = async (credentials) => socketio.auth.emit('signup', credentials);
 
-socketio.auth.on('errorHandler', data => show(data.message));
-socketio.auth.on('login', data => {
+socketio.auth.on('errorHandler', (data) => show(data.message));
+socketio.auth.on('login', (data) => {
   setToken(data.token);
+  data.activities.forEach(activities.add);
   transition('out-bottom', 'login');
   transition('in-bottom', 'activities');
   transition('in-bottom', 'navigation');
 });
-socketio.auth.on('signup', data => {
+socketio.auth.on('signup', (data) => {
   setToken(data.token);
   transition('out-bottom', 'signup');
   transition('in-bottom', 'activities');
   transition('in-bottom', 'navigation');
 });
-socketio.auth.on('verifyJWT', data => {
+socketio.auth.on('verifyJWT', (data) => {
   transition('out-bottom', 'splash');
   if ('error' in data) return transition('in-bottom', 'login');
-  console.log(data);
+  setToken(data.token);
+  data.activities.forEach(activities.add);
   transition('in-bottom', 'activities');
   transition('in-bottom', 'navigation');
 });
@@ -74,14 +103,6 @@ const auth = {
   setToken,
   signup,
   verifyJWT,
-};
-
-socketio.activities.on('add', data => {
-  console.log(data);
-});
-
-var activities = {
-  addEventListeners: () => {},
 };
 
 // get successful control from form and assemble into object
@@ -350,7 +371,7 @@ const clearForm = () => {
   document.querySelector('.page-add form [name="frequency"]').checked = false;
 };
 
-var add = {
+var add$1 = {
   addEventListeners: () => {
     document
       .querySelector('.page-add form')
@@ -396,7 +417,7 @@ var splash = {
 
 const pages = {
   activities,
-  add,
+  add: add$1,
   login: login$1,
   signup: signup$1,
   splash,

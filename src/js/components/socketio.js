@@ -1,8 +1,8 @@
 import io from 'socket.io-client/dist/socket.io';
 
 const socketio = {
-  activities: io('http://localhost:5500/activities'),
-  auth: io('http://localhost:5500/auth'),
+  activities: io(`${window.location.host}/activities`),
+  auth: io(`${window.location.host}/auth`),
 };
 
 export default socketio;

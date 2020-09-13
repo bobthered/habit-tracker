@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 import { Activity } from '../../models';
 
-const add = socket => {
+const add = (socket) => {
   socket.on('add', async (data, token) => {
     try {
       // decode jwt
@@ -17,7 +17,6 @@ const add = socket => {
       await activity.save();
 
       socket.emit('add', { activity });
-      console.log(activity);
     } catch (error) {
       console.log('socketio.activities.add.js', error);
     }
