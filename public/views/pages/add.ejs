@@ -1,0 +1,34 @@
+<div class="page page-add page-anim-hidden bg-gray-800">
+  <form action="#" class="form-add flex flex-col p-4 space-y-8 h-full">
+    <h1 class="uppercase text-3xl text-gray-50">Add Activity</h1>
+    <div class="flex flex-col space-y-8 flex-grow">
+      <input type="text" name="name" placeholder="Name" />
+      <div class="flex flex-col space-y-4">
+        <div class="text-gray-50">Frequency</div>
+        <div class="grid grid-cols-2 gap-2">
+          <% const addFrequency = ['Daily', 'Weekly','Monthly','Yearly'] %> <%
+          for ( let i = 0; i< addFrequency.length; i++ ) { %>
+          <label class="radio">
+            <input
+              type="radio"
+              name="frequency"
+              value="<%- addFrequency[i].toLowerCase() %>"
+            />
+            <span><%- addFrequency[i] %></span>
+          </label>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col space-y-4">
+      <button>Add</button>
+      <a
+        href="#"
+        class="btn bg-transparent text-primary-500 shadow-none hover:shadow-none hover:bg-transparent hover:text-primary-400"
+        pageTransition="out-modal,add"
+      >
+        Cancel
+      </a>
+    </div>
+  </form>
+</div>

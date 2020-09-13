@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta -->
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+
+    <!-- Title -->
+    <title>Habit Tracker</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml" />
+    <meta name="msapplication-TileColor" content="#00C49A">
+    <meta name="theme-color" content="#00C49A">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/site.webmanifest">
+  </head>
+  <body class="bg-gray-800">
+    <div class="relative w-screen h-screen overflow-hidden">
+      <%- include('../pages/splash') %> 
+      <%- include('../pages/login') %> 
+      <%- include('../pages/signup') %> 
+      <%- include('../pages/activities') %> 
+      <%- include('../pages/calendar') %> 
+      <%- include('../pages/navigation') %> 
+      <%- include('../pages/add') %> 
+      <%- include('../pages/error') %> 
+      <%- include('../pages/spinner') %>
+    </div>
+    <script src="/js/script.js"></script>
+  </body>
+</html>

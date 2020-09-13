@@ -1,0 +1,191 @@
+@import 'tailwindcss/base';
+
+button,
+.btn {
+  @apply p-4 rounded-full bg-primary-500 text-gray-800 text-center shadow-btn-primary-500 transition duration-200;
+}
+
+button:hover,
+button:focus,
+.btn:hover,
+.btn:focus {
+  @apply outline-none bg-primary-400 shadow-btn-primary-400;
+}
+
+.btn-transparent {
+  @apply bg-transparent text-primary-500 shadow-none;
+}
+
+button.btn-transparent:hover,
+button.btn-transparent:focus,
+.btn-transparent:hover,
+.btn-transparent:focus {
+  @apply bg-transparent text-primary-400 shadow-none;
+}
+
+.icon-calendar,
+.icon-check,
+.icon-chevron,
+.icon-cog,
+.icon-email,
+.icon-grid,
+.icon-list,
+.icon-lock,
+.icon-plus,
+.icon-stats,
+.icon-user,
+label.radio input:checked ~ span:after {
+  mask-size: cover;
+  -webkit-mask-size: cover;
+}
+.icon-calendar,
+.input-container.calendar:after {
+  mask-image: url('/images/icons/calendar.svg');
+  -webkit-mask-image: url('/images/icons/calendar.svg');
+}
+.icon-check,
+.input-container.check:after,
+label.radio input:checked ~ span:after {
+  mask-image: url('/images/icons/check.svg');
+  -webkit-mask-image: url('/images/icons/check.svg');
+}
+.icon-chevron,
+.input-container.chevron:after {
+  mask-image: url('/images/icons/chevron.svg');
+  -webkit-mask-image: url('/images/icons/chevron.svg');
+}
+.icon-cog,
+.input-container.cog:after {
+  mask-image: url('/images/icons/cog.svg');
+  -webkit-mask-image: url('/images/icons/cog.svg');
+}
+.icon-email,
+.input-container.email:after {
+  mask-image: url('/images/icons/email.svg');
+  -webkit-mask-image: url('/images/icons/email.svg');
+}
+.icon-grid,
+.input-container.grid:after {
+  mask-image: url('/images/icons/grid.svg');
+  -webkit-mask-image: url('/images/icons/grid.svg');
+}
+.icon-list,
+.input-container.list:after {
+  mask-image: url('/images/icons/list.svg');
+  -webkit-mask-image: url('/images/icons/list.svg');
+}
+.icon-lock,
+.input-container.lock:after {
+  mask-image: url('/images/icons/lock.svg');
+  -webkit-mask-image: url('/images/icons/lock.svg');
+}
+.icon-plus,
+.input-container.plus:after {
+  mask-image: url('/images/icons/plus.svg');
+  -webkit-mask-image: url('/images/icons/plus.svg');
+}
+.icon-stats,
+.input-container.stats:after {
+  mask-image: url('/images/icons/stats.svg');
+  -webkit-mask-image: url('/images/icons/stats.svg');
+}
+.icon-user,
+.input-container.user:after {
+  mask-image: url('/images/icons/user.svg');
+  -webkit-mask-image: url('/images/icons/user.svg');
+}
+
+input {
+  @apply bg-transparent w-full p-4 rounded border border-gray-700 transition duration-200;
+}
+
+input,
+::placeholder {
+  @apply text-gray-50;
+}
+
+input:hover {
+  @apply border-gray-600;
+}
+
+input:focus {
+  @apply outline-none bg-gray-700 border-primary-500;
+}
+
+.input-container {
+  @apply relative;
+}
+
+.input-container.email:after,
+.input-container.calendar:after,
+.input-container.check:after,
+.input-container.chevron:after,
+.input-container.cog:after,
+.input-container.email:after,
+.input-container.grid:after,
+.input-container.list:after,
+.input-container.lock:after,
+.input-container.plus:after,
+.input-container.stats:after,
+.input-container.user:after {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  height: 1.5rem;
+  mask-size: cover;
+  -webkit-mask-size: cover;
+  pointer-events: none;
+  top: 1rem;
+  width: 1.5rem;
+  @apply bg-gray-50;
+}
+
+.input-container input {
+  @apply pl-14;
+}
+
+label.radio {
+  @apply flex relative;
+}
+
+label.radio input {
+  @apply opacity-0 absolute;
+}
+
+label.radio span {
+  @apply bg-transparent w-full p-4 rounded border border-gray-700 transition duration-200 text-gray-50 relative pl-12;
+}
+
+label.radio span::after {
+  content: '';
+  left: 1rem;
+  top: 1rem;
+  position: absolute;
+  @apply w-6 h-6 border border-gray-700 rounded-full;
+}
+
+label.radio input:hover ~ span,
+label.radio input:hover ~ span:after {
+  @apply border-gray-600;
+}
+
+label.radio input:focus ~ span,
+label.radio input:focus ~ span:after {
+  @apply outline-none bg-gray-700 border-primary-500;
+}
+
+label.radio input:checked ~ span {
+  @apply bg-primary-500 border-primary-500 text-gray-50;
+}
+
+label.radio input:checked ~ span:after {
+  @apply bg-gray-50 border-gray-50;
+}
+
+.page {
+  @apply absolute w-screen h-screen flex flex-col transition transform duration-200 overflow-y-auto;
+}
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
